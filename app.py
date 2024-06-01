@@ -2,7 +2,7 @@ import streamlit as st
 import pandas as pd
 import plotly_express as px
 cars = pd.read_csv('vehicles_us.csv')
-cars['make'] = cars['model'].apply(lambda x: x.split()[0])
+cars['make'] = cars['model'].str.split().str[0]
 st.header('Data Viewer')
 st.dataframe(cars)
 st.header('Vehicle Types by Make')
@@ -13,19 +13,19 @@ fig2 = px.histogram(cars, x='model_year', color='condition')
 st.write(fig2)
 st.header('Compare Price Distribution between Makes')
 make_list = sorted(cars['make'].unique())
-make_1 = st.selectbox(
+make_1 = st.sidebar.selectbox(
     label = 'Select Make 1',
     options=make_list,
     index=make_list.index('honda')
 )
-make_2 = st.selectbox(
+make_2 = st.sidebar.selectbox(
     label='Select Make 2',
     options=make_list,
     index=make_list.index('toyota')
 )
 mask_filter = (cars['make'] == make_1) | (cars['make'] == make_2)
 cars_filtered = cars[mask_filter]
-normalize = st.checkbox('Normalize Histogram', value=True, key=1)
+normalize = st.sidebar.checkbox('Normalize Histogram', value=True, key=1)
 if normalize:
     histnorm = 'percent'
 else:
@@ -49,7 +49,7 @@ cars_ppmy = cars.groupby('model_year').agg(avg_price=('price', 'mean')).reset_in
 fig6 = px.scatter(cars_ppmy, x='model_year', y='avg_price')
 st.write(fig6)
 st.header('Cost by Condition')
-normalize = st.checkbox('Normalize Histogram', value=True, key=2)
+normalize = st.sidebar.checkbox('Normalize Histogram', value=True, key=2)
 if normalize:
     histnorm = 'percent'
 else:

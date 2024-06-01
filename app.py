@@ -11,10 +11,12 @@ cars['cylinders'] = cars[['cylinders', 'model']].groupby('model').transform(lamb
 cars['odometer'] = cars[['odometer', 'condition']].groupby('condition').transform(lambda x:x.fillna(x.mean()))
 cars = cars.fillna('Unknown')
 
-#figure 1
-st.header('Figure 1: Data Viewer')
+#Data Viewer
+st.header('Data Viewer')
 st.dataframe(cars)
-st.header('Vehicle Types by Make')
+
+#Figure 1
+st.header('Figure 1: Vehicle Types by Make')
 fig1 = px.histogram(cars, x='make', color='type')
 st.write(fig1)
 

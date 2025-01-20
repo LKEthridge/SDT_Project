@@ -5,7 +5,7 @@ This project visualizes car advertisement data from one data set containing info
 👩🏽‍💻 Command line
 🪐 Jupyter Notebook
 🕸️ Web API
-🕸️ Web Application Building
+🏗️ Web Application Building
 👩🏽‍💻 Development Environment
 🐍 Anaconda Distribution
 📂 File-IO

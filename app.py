@@ -4,6 +4,8 @@ import plotly_express as px
 
 #import and clean data
 cars = pd.read_csv('vehicles_us.csv')
+cars['price'] = pd.to_numeric(cars['price'], errors='coerce')
+cars['price'] = cars['price'].fillna('0').astype('int64')
 cars['make'] = cars['model'].str.split().str[0]
 cars['is_4wd'] = cars['is_4wd'].fillna('0')
 cars['model_year'] = cars[['model_year', 'model']].groupby('model').transform(lambda x:x.fillna(x.median()))
